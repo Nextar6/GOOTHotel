@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- jspf 파일은 fragment가 추가된것 -->
+<style>
+.footer {
+	padding: 30px;
+	text-align: center;
+	background: #1abc9c;
+	color: white;
+	font-size: 15px;
+}
+
+.icon-bar {
+	
+	
+	top: 75%;
+	-webkit-transform: translateY(-20%);
+	-ms-transform: translateY(-20%);
+	transform: translateY(-20%);
+	text-align: right;
+}
+
+.icon-bar a {
+float: right;
+	display : block;
+	text-align: right;
+	padding: 12px;
+	transition: all 0.3s ease;
+	color: white;
+	font-size: 20px;
+	display: block;
+}
+
+.icon-bar a:hover {
+	background-color: #000;
+}
+
+.facebook {
+	background: #3B5998;
+	color: white;
+}
+
+.twitter {
+	background: #55ACEE;
+	color: white;
+}
+
+.google {
+	background: #dd4b39;
+	color: white;
+}
+
+.linkedin {
+	background: #007bb5;
+	color: white;
+}
+
+.youtube {
+	background: #bb0000;
+	color: white;
+}
+</style>
+
+<div class="footer">
+<div class="icon-bar" style="float: right; text-align: right;">
+	<a href="#" class="facebook"><i class="fa fa-facebook"></i></a> <a
+		href="#" class="twitter"><i class="fa fa-twitter"></i></a> <a href="#"
+		class="google"><i class="fa fa-google"></i></a> <a href="#"
+		class="linkedin"><i class="fa fa-linkedin"></i></a> <a href="#"
+		class="youtube"><i class="fa fa-youtube"></i></a>
+</div>
+	(주) 구트호텔<br> https://www.gootHotel.co.kr<br> TEL:
+	010-1234-1234 주소 : 서울특별시 구로구 주호타워 2층 | 대표이사 : 서태규 | 사업자등록번호: 72-86-0224
+	통신판매번호 : 2017-서울구로-01779 | 관광사업자 등록번호: 제1026-24호 | 전화번호 : 0670-250 |
+	전자우편주소 : hotel@goodchoice.kr 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불
+	등과 관련한 의무와 책임은 각 판매자에게 있습니다. Copyright GOOT COMPANY Corp. All rights
+	reserved.
+</div>

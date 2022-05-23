@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.ProjectMapper">
+
+	<insert id="insert">
+		insert into ${project} (${projectTitle},
+		${projectContent},
+		${writer})
+		values (#{projectTitle},
+		#{projectContent}, #{writer})
+	</insert>
+
+	<select id="select_all" resultType="ProjectVO">
+		select * from ${project}
+		order
+		by ${projectNo} desc
+	</select>
+
+	<select id="select_by_project_no" resultType="ProjectVO">
+		select * from
+		${project} where ${projectNo} = #{projectNo}
+	</select>
+
+	<update id="update">
+		update ${project}
+		set ${projectTitle} =
+		#{projectTitle},
+		${projectContent} = #{projectContent}
+		where
+		${projectNo} = #{projectNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${project}
+		where ${projectNo} =
+		#{projectNo}
+	</delete>
+
+	<select id="paging" resultType="ProjectVO">
+		select b.${projectNo},
+		b.${projectTitle},
+		b.${projectContent}, b.${writer},
+		b.${projectCdate} from(
+		select rownum rn, a.* from(
+		select * from ${project}
+		order by ${projectNo} desc
+		)a
+		)b where rn between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt
+		from ${project}
+	</select>
+
+
+</mapper>

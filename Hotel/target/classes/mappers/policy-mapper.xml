@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.PolicyMapper">
+
+	<insert id="insert">
+		insert into ${policy} (${policyTitle}, ${policyContent},
+		${writer})
+		values (#{policyTitle}, #{policyContent}, #{writer})
+	</insert>
+
+	<select id="select_all" resultType="PolicyVO">
+		select * from ${policy}
+		order
+		by ${policyNo} desc
+	</select>
+
+	<select id="select_by_policy_no" resultType="PolicyVO">
+		select * from
+		${policy} where ${policyNo} = #{policyNo}
+	</select>
+
+	<update id="update">
+		update ${policy}
+		set ${policyTitle} = #{policyTitle},
+		${policyContent} = #{policyContent}
+		where ${policyNo} = #{policyNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${policy}
+		where ${policyNo} = #{policyNo}
+	</delete>
+
+	<select id="paging" resultType="PolicyVO">
+		select b.${policyNo}, b.${policyTitle},
+		b.${policyContent}, b.${writer},
+		b.${policyCdate} from(
+		select rownum rn, a.* from(
+		select * from ${policy} 
+		order by ${policyNo} desc
+		)a
+		)b where rn between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt from ${policy}
+	</select>
+
+
+</mapper>

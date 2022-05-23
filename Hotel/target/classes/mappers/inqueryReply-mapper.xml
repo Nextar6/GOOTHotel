@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.InqueryReplyMapper">
+	
+	
+	<insert id="insert">
+		insert into ${inquery_reply}
+		(${inqueryNo}, ${inqueryRpContent}, ${memberUserid})
+		values (#{inqueryNo}, #{inqueryRpContent}, #{memberUserid})
+	</insert>
+	
+	<select id="select_all_by_inquery_no" resultType="InqueryReplyVO">
+		select * from ${inquery_reply}
+		where ${inqueryNo} = #{inqueryNo}
+		order by ${inqueryRpNo}
+	</select>
+	
+	<update id="update">
+		update ${inquery_reply}
+		set ${inqueryRpContent} = #{inqueryRpContent}
+		where ${inqueryRpNo} = #{inqueryRpNo}
+	</update>
+
+	<delete id="delete">
+		delete from ${inquery_reply}
+		where ${inqueryRpNo} = #{inqueryRpNo}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

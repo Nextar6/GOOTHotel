@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.MemberMapper">
+
+	<!-- 회원가입 -->
+	<insert id="insert">
+		insert into ${member} (${memberUserid}, ${memberPassword}, ${memberEmail}, 
+								${memberSSN}, ${memberPhone}, ${memberName}, ${memberAddress})
+		values (#{memberUserid}, #{memberPassword}, #{memberEmail}, 
+				#{memberSSN}, #{memberPhone}, #{memberName}, #{memberAddress})
+	</insert>
+	
+	<!-- 로그인을 위한 아이디와 비밀번호에 맞는 정보 가져오기 -->
+	<select id="select_login" resultType="String">
+		select ${memberUserid} from ${member} where 
+		${memberUserid} = #{memberUserid} and ${memberPassword} = #{memberPassword}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="update">
+		update ${member}
+		set ${memberPassword} = #{memberPassword}, 
+		${memberEmail} = #{memberEmail}, 
+		${memberPhone} = #{memberPhone}, 
+		${memberAddress} = #{memberAddress}
+		where ${memberUserid} = #{memberUserid}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="delete">
+		delete from ${member}
+		where ${memberUserid} = #{memberUserid}
+	</delete>
+	
+	<!-- 회원 전체 정보 찾기 -->
+	<select id="select_all" resultType="MemberVO">
+		select * from ${member}
+		order by ${memberNo} desc
+	</select>
+	
+	<!-- 회원 아이디로 전체 회원 정보 검색 -->
+	<select id="select_by_userid" resultType="MemberVO">
+		select * from ${member}
+		where ${memberUserid} like #{memberUserid}
+		order by ${memberNo} desc
+	</select>
+	
+	<!-- 회원 이름으로 검색 -->
+	<select id="select_by_name" resultType="MemberVO">
+		select * from ${member}
+		where ${memberName} like #{memberName}
+		order by ${memberNo} desc
+	</select>
+	
+	<!-- 회원가입 아이디 체크 -->
+	<select id="select_register_id_check" resultType="String">
+		select ${memberUserid} from ${member}
+		where ${memberUserid} = #{memberUserid}
+	</select>
+	
+	<!-- 회원 아이디 찾기 -->
+	<select id="select_find_userid" resultType="String">
+		select ${memberUserid} from ${member}
+		where ${memberEmail} = #{memberEmail} 
+		and ${memberPhone} = #{memberPhone}
+	</select>
+	
+	<!-- 회원 비밀번호 찾기 -->
+	<select id="select_find_password" resultType="String">
+		select ${memberPassword} from ${member}
+		where ${memberUserid} = #{memberUserid}
+		and ${memberPhone} = #{memberPhone}
+	</select>
+	
+	<!-- 회원 프로필 정보 띄우기 -->
+	<select id="select_profile" resultType="MemberVO">
+		select * from ${member} where
+		${memberUserid} = #{memberUserid}
+	</select>
+	
+</mapper>

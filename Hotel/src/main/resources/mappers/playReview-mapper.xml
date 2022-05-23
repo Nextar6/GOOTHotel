@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.PlayReviewMapper">
+
+	<insert id="insert">
+		insert into ${play_review} (${playRvTitle},
+		${playRvLike}, ${playRvContent},
+		${memberUserid}, ${playNo})
+		values
+		(#{playRvTitle},
+		#{playRvLike},
+		#{playRvContent}, #{memberUserid},
+		#{playNo})
+	</insert>
+
+	<select id="select_all" resultType="PlayReviewVO">
+		select * from ${play_review}
+		order by ${playNo} desc
+	</select>
+
+	<select id="select_by_play_no" resultType="PlayReviewVO">
+		select * from
+		${play_review} where ${playNo} = #{playNo} order by ${playRvNo} desc
+	</select>
+
+	<update id="update">
+		update ${play_review}
+		set ${playRvTitle} =
+		#{playRvTitle}, ${playRvLike} = #{playRvLike},
+		${playRvContent} =
+		#{playRvContent}
+		where
+		${playRvNo} = #{playRvNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${play_review}
+		where ${playRvNo} =
+		#{playRvNo}
+	</delete>
+	
+	<delete id="delete_by_play_no">
+		delete from ${play_review}
+		where ${playNo} = #{playNo}
+	</delete>
+
+
+
+
+</mapper>

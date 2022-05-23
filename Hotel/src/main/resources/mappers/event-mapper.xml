@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.EventMapper">
+
+	<insert id="insert">
+		insert into ${event} (${eventTitle}, ${eventContent},
+		${writer})
+		values (#{eventTitle}, #{eventContent}, #{writer})
+	</insert>
+
+	<select id="select_all" resultType="EventVO">
+		select * from ${event}
+		order
+		by ${eventNo} desc
+	</select>
+
+	<select id="select_by_event_no" resultType="EventVO">
+		select * from
+		${event} where ${eventNo} = #{eventNo}
+	</select>
+
+	<update id="update">
+		update ${event}
+		set ${eventTitle} = #{eventTitle},
+		${eventContent} = #{eventContent}
+		where ${eventNo} = #{eventNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${event}
+		where ${eventNo} = #{eventNo}
+	</delete>
+
+	<select id="paging" resultType="EventVO">
+		select b.${eventNo}, b.${eventTitle},
+		b.${eventContent}, b.${writer},
+		b.${eventCdate} from(
+		select rownum rn, a.* from(
+		select * from ${event} 
+		order by ${eventNo} desc
+		)a
+		)b where rn between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt from ${event}
+	</select>
+
+
+</mapper>

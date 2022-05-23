@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- DB 테이블과 컬럼들을 mapper에 매핑하기 위한 변수 선언 -->
+	<properties>
+		<!-- * property - name : mapper.xml에서 사용될 이름 - value : DB 테이블 및 컬럼 이름 -->
+
+		<!-- 더보기 게시판 테이블 -->
+		<property name="anounce" value="anounce" />
+		<property name="anounceNo" value="anounce_no" />
+		<property name="anounceTitle" value="anounce_title" />
+		<property name="anounceContent" value="anounce_content" />
+		<property name="writer" value="anounce_writer" />
+		<property name="anounceCdate" value="anounce_cdate" />
+
+		<property name="event" value="event" />
+		<property name="eventNo" value="event_no" />
+		<property name="eventTitle" value="event_title" />
+		<property name="eventContent" value="event_content" />
+		<property name="writer" value="writer" />
+		<property name="eventCdate" value="event_cdate" />
+
+		<property name="project" value="project" />
+		<property name="projectNo" value="project_no" />
+		<property name="projectTitle" value="project_title" />
+		<property name="projectContent" value="project_content" />
+		<property name="writer" value="writer" />
+		<property name="projectCdate" value="project_cdate" />
+
+		<property name="question" value="question" />
+		<property name="questionNo" value="question_no" />
+		<property name="questionTitle" value="question_title" />
+		<property name="questionContent" value="question_content" />
+		<property name="writer" value="writer" />
+		<property name="questionCdate" value="question_cdate" />
+
+		<property name="policy" value="policy" />
+		<property name="policyNo" value="policy_no" />
+		<property name="policyTitle" value="policy_title" />
+		<property name="policyContent" value="policy_content" />
+		<property name="writer" value="writer" />
+		<property name="policyCdate" value="policy_cdate" />
+
+		<property name="inquery" value="inquery" />
+		<property name="inqueryNo" value="inquery_no" />
+		<property name="inqueryTitle" value="inquery_title" />
+		<property name="inqueryContent" value="inquery_content" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="inqueryCdate" value="inquery_cdate" />
+		<property name="inqueryReplyCount"
+			value="inquery_reply_count" />
+
+
+		<!--Inquery 댓글 테이블 -->
+
+		<property name="inquery_reply" value="inquery_reply" />
+		<property name="inqueryRpNo" value="inquery_rp_no" />
+		<property name="inqueryNo" value="inquery_no" />
+		<property name="inqueryRpContent" value="inquery_rp_content" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="inqueryRpCdate" value="inquery_rp_cdate" />
+
+		<!-- 회원 테이블 -->
+
+		<property name="member" value="member" />
+		<property name="memberNo" value="member_no" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="memberPassword" value="member_password" />
+		<property name="memberEmail" value="member_email" />
+		<property name="memberSSN" value="member_ssn" />
+		<property name="memberPhone" value="member_phone" />
+		<property name="memberName" value="member_name" />
+		<property name="memberAddress" value="member_address" />
+		<property name="memberCdate" value="member_cdate" />
+		<!-- Play Table -->
+		<property name="play" value="play" />
+		<property name="playNo" value="play_no" />
+		<property name="playTitle" value="play_title" />
+		<property name="playContent" value="play_content" />
+		<property name="playPic" value="play_pic" />
+		<property name="playBookDate" value="play_book_date" />
+		<property name="playReplyCount" value="play_reply_count" />
+		<property name="playCdate" value="play_cdate" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="playPrice" value="play_price" />
+		<property name="playLikeCount" value="play_like_count" />
+
+
+
+		<!-- Play Review Talble -->
+		<property name="play_review" value="play_review" />
+		<property name="playRvNo" value="play_rv_no" />
+		<property name="playRvLike" value="play_rv_like" />
+		<property name="playRvTitle" value="play_rv_title" />
+		<property name="playRvContent" value="play_rv_content" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="playRvCdate" value="play_rv_cdate" />
+		<property name="playNo" value="play_no" />
+		
+			<!-- Food Review Talble -->
+		<property name="food_review" value="food_review" />
+		<property name="foodRvNo" value="food_rv_no" />
+		<property name="foodRvLike" value="food_rv_like" />
+		<property name="foodRvTitle" value="food_rv_title" />
+		<property name="foodRvContent" value="food_rv_content" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="foodRvCdate" value="food_rv_cdate" />
+		<property name="foodNo" value="food_no" />
+
+
+		<!-- Food Table -->
+		<property name="food" value="food" />
+		<property name="foodNo" value="food_no" />
+		<property name="foodTitle" value="food_title" />
+		<property name="foodContent" value="food_content" />
+		<property name="foodPic" value="food_pic" />
+		<property name="foodBookDate" value="food_book_date" />
+		<property name="foodReplyCount" value="food_reply_count" />
+		<property name="foodCdate" value="food_cdate" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="foodPrice" value="food_price" />
+		<property name="foodLikeCount" value="food_like_count" />
+
+		<!-- 진수 프로젝트 -->
+		<property name="member" value="member" />
+		<property name="memberNo" value="member_no" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="memberPassword" value="member_password" />
+		<property name="memberEmail" value="member_email" />
+		<property name="memberSSN" value="member_ssn" />
+		<property name="memberPhone" value="member_phone" />
+		<property name="memberName" value="member_name" />
+		<property name="memberAddress" value="member_address" />
+		<property name="memberCdate" value="member_cdate" />
+
+
+		<property name="hotel" value="hotel" />
+		<property name="hotelNo" value="hotel_no" />
+		<property name="hotelTitle" value="hotel_title" />
+		<property name="hotelPricePeople" value="hotel_price_people" />
+		<property name="hotelPriceNight" value="hotel_price_night" />
+		<property name="hotelContent" value="hotel_content" />
+		<property name="hotelGrade" value="hotel_grade" />
+		<property name="hotelAddress" value="hotel_address" />
+		<property name="hotelPackage" value="hotel_package" />
+		<property name="hotelPic" value="hotel_pic" />
+
+		<property name="review" value="review" />
+		<property name="reviewNo" value="review_no" />
+		<property name="hotelNo" value="hotel_no" />
+		<property name="reviewWriter" value="review_writer" />
+		<property name="reviewContent" value="review_content" />
+		<property name="reviewGrade" value="review_grade" />
+		<property name="reviewCdate" value="review_cdate" />
+		<property name="reviewPic" value="review_pic" />
+
+		<property name="reservat" value="reservat" />
+		<property name="reservatNo" value="reservat_no" />
+		<property name="hotelNo" value="hotel_no" />
+		<property name="reservatNight" value="reservat_night" />
+		<property name="reservatUserid" value="reservat_userid" />
+		<property name="reservatPeople" value="reservat_people" />
+		<property name="checkIn" value="check_in" />
+		<property name="checkOut" value="check_out" />
+		<property name="reservatCdate" value="reservat_cdate" />
+		<property name="reservatPrice" value="reservat_price" />
+
+
+	</properties>
+
+
+
+
+
+	<!--db에서 camel명명법이 불가능하기때문에 underscore 명명법을 camel 명명법으로 가능하도록 세팅 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+
+	</settings>
+
+	<!-- typeAlises : mapper.xml의 select 리턴 타입에 들어갈 클래스 경로를 설정 -->
+
+	<typeAliases>
+		<package name="edu.spring.hotel.domain" />
+	</typeAliases>
+
+
+
+	<!-- 주의!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!경고!!!!!!!! -->
+
+
+</configuration>

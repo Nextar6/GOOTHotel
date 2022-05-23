@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.QuestionMapper">
+
+	<insert id="insert">
+		insert into ${question} (${questionTitle}, ${questionContent},
+		${writer})
+		values (#{questionTitle}, #{questionContent}, #{writer})
+	</insert>
+
+	<select id="select_all" resultType="QuestionVO">
+		select * from ${question}
+		order
+		by ${questionNo} desc
+	</select>
+
+	<select id="select_by_question_no" resultType="QuestionVO">
+		select * from
+		${question} where ${questionNo} = #{questionNo}
+	</select>
+
+	<update id="update">
+		update ${question}
+		set ${questionTitle} = #{questionTitle},
+		${questionContent} = #{questionContent}
+		where ${questionNo} = #{questionNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${question}
+		where ${questionNo} = #{questionNo}
+	</delete>
+
+	<select id="paging" resultType="QuestionVO">
+		select b.${questionNo}, b.${questionTitle},
+		b.${questionContent}, b.${writer},
+		b.${questionCdate} from(
+		select rownum rn, a.* from(
+		select * from ${question} 
+		order by ${questionNo} desc
+		)a
+		)b where rn between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt from ${question}
+	</select>
+
+
+</mapper>

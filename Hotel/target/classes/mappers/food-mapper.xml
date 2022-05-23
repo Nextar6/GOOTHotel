@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.FoodMapper">
+
+	<insert id="insert">
+		insert into ${food} (${foodTitle},
+		${foodContent},
+		${foodPic}, ${foodBookDate},
+		${memberUserid},
+		${foodPrice})
+		values (#{foodTitle},
+		#{foodContent}, #{foodPic},
+		#{foodBookDate},
+		#{memberUserid}, #{foodPrice})
+	</insert>
+
+	<select id="select_all" resultType="FoodVO">
+		select * from ${food}
+		order by
+		${foodNo} desc
+	</select>
+
+	<select id="select_by_food_no" resultType="FoodVO">
+		select * from
+		${food}
+		where ${foodNo} = #{foodNo}
+	</select>
+
+
+	<select id="paging" resultType="FoodVO">
+		select b.${foodNo},
+		b.${foodTitle}, b.${foodBookDate},
+		b.${foodContent}, b.${foodPic},
+		b.${memberUserid}, b.${foodBookDate},
+		b.${foodReplyCount},
+		b.${foodCdate}, b.${foodPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${food}
+		order by
+		${foodNo}
+		desc
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt
+		from ${food}
+	</select>
+
+	<update id="update">
+
+		update ${food}
+		set
+		${foodTitle} = #{foodTitle},
+		${foodContent} = #{foodContent}
+			, ${foodPic} = #{foodPic}
+
+		where
+		${foodNo} = #{foodNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${food} where ${foodNo} = #{foodNo}
+
+	</delete>
+	
+	<update id="update_reply_count">
+	   	update ${food}
+	   	set ${foodReplyCount} = ${foodReplyCount} + #{amount}
+	   	where ${foodNo} = #{foodNo}
+	   </update>
+	   
+	   <!-- 리뷰에서 like 가져와서 평점 저장 -->
+	   <update id="update_like_count">
+	   	update ${food}
+	   	set ${foodLikeCount} = ${foodLikeCount} + #{amount}
+	   	where ${foodNo} = #{foodNo}
+	   </update>
+	   
+	 <!-- 댓글 많은순 정렬 -->
+	 	<select id="order_by_reply" resultType="FoodVO">
+		select b.${foodNo},
+		b.${foodTitle}, b.${foodBookDate},
+		b.${foodContent}, b.${playPic},
+		b.${memberUserid}, b.${foodBookDate},
+		b.${foodReplyCount}, 
+		b.${foodCdate}, b.${foodPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${food}
+		order by
+		${foodReplyCount}
+		desc
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+	
+	<!-- 가격순 정렬 -->
+	<select id="order_by_price" resultType="FoodVO">
+		select b.${foodNo},
+		b.${foodTitle}, b.${foodBookDate},
+		b.${foodContent}, b.${foodPic},
+		b.${memberUserid}, b.${foodBookDate},
+		b.${foodReplyCount}, 
+		b.${foodCdate}, b.${foodPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${food}
+		order by
+		${foodPrice}
+		<if test="keyword.equals('max')">
+		desc
+		</if>
+		<if test="keyword.equals('min')">
+		asc
+		</if>	
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+	
+	<!-- 인기순 ( 평점순 으로 정렬 ) -->
+	
+	 	<select id="order_by_like" resultType="PlayVO">
+		select b.${foodNo},
+		b.${foodTitle}, b.${foodBookDate},
+		b.${foodContent}, b.${foodPic},
+		b.${memberUserid}, b.${foodBookDate},
+		b.${foodReplyCount}, b.${foodLikeCount},
+		b.${foodCdate}, b.${foodPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${food}
+		order by
+		${foodLikeCount}
+		desc
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+
+
+
+
+</mapper>

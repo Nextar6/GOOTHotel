@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.HotelMapper">
+
+	<!-- 호텔 등록 -->
+	<insert id="insert">
+		insert into ${hotel} (${hotelTitle},
+		${hotelPricePeople}, ${hotelPriceNight}, ${hotelContent},
+		${hotelGrade},
+		${hotelAddress}, ${hotelPackage}, ${hotelPic})
+		values (#{hotelTitle},
+		#{hotelPricePeople}, #{hotelPriceNight}, #{hotelContent},
+		#{hotelGrade},
+		#{hotelAddress}, #{hotelPackage}, #{hotelPic})
+	</insert>
+
+	<!-- 호텔 정보 수정 -->
+	<update id="update">
+		update ${hotel}
+		set ${hotelTitle} = #{hotelTitle},
+		${hotelPricePeople} = #{hotelPricePeople},
+		${hotelPriceNight} = #{hotelPriceNight},
+		${hotelContent} = #{hotelContent},
+		${hotelGrade} =
+		#{hotelGrade},
+		${hotelAddress} = #{hotelAddress},
+		${hotelPackage} =
+		#{hotelPackage},
+		${hotelPic} = #{hotelPic}
+		where ${hotelNo} = #{hotelNo}
+	</update>
+
+	<!-- 호텔 삭제 -->
+	<delete id="delete">
+		delete from ${hotel}
+		where ${hotelNo} = #{hotelNo}
+	</delete>
+
+	<!-- 호텔 전체 리스트 검색 -->
+	<select id="select_all" resultType="HotelVO">
+		select * from ${hotel}
+		order
+		by ${hotelNo} desc
+	</select>
+
+	<!-- 호텔번호로 검색 -->
+	<select id="select_by_no" resultType="HotelVO">
+		select * from ${hotel}
+		where ${hotelNo} = #{hotelNo}
+	</select>
+
+	<!-- 호텔 이름으로 검색 -->
+	<select id="select_by_title" resultType="HotelVO">
+		select * from ${hotel}
+		where ${hotelTitle} like #{hotelTitle}
+		order by ${hotelTitle} desc
+	</select>
+
+	<select id="paging" resultType="HotelVO">
+		select h.${hotelNo}, h.${hotelTitle}, h.${hotelContent},
+		h.${hotelPricePeople}, h.${hotelPriceNight},
+		h.${hotelAddress}, h.${hotelGrade}, h.${hotelPackage}, h.${hotelPic}
+		from(
+		select rownum rn, a.* from(
+		select * from ${hotel} order by ${hotelNo} desc
+		)a
+		)h where rn between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt from ${hotel}
+	</select>
+</mapper>	

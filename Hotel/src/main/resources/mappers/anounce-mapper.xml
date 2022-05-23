@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.AnounceMapper">
+
+	<insert id="insert">
+		insert into ${anounce} (${anounceTitle},
+		${anounceContent},
+		${writer})
+		values (#{anounceTitle},
+		#{anounceContent}, #{writer})
+	</insert>
+
+	<select id="select_all" resultType="AnounceVO">
+		select * from ${anounce}
+		order by ${anounceNo} desc
+	</select>
+
+
+	<select id="select_all_anounce" resultType="AnounceVO">
+		select b.${anounceNo}, b.${anounceTitle}, b.${anounceContent}, b.${writer},
+		b.${anounceCdate} from(
+		select rownum rn, a.* from(
+		select * from
+		${board} where order by ${anounceNo} desc
+		)a
+		)b where rn between
+		#{start} and #{end}
+	</select>
+
+	<select id="select_by_anounce_no" resultType="AnounceVO">
+		select * from ${anounce} where ${anounceNo} = #{anounceNo}
+	</select>
+
+	<update id="update">
+		update ${anounce}
+		set ${anounceTitle} =
+		#{anounceTitle},
+		${anounceContent} = #{anounceContent}
+		where
+		${anounceNo} = #{anounceNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${anounce}
+		where ${anounceNo} =
+		#{anounceNo}
+	</delete>
+
+
+	<select id="paging" resultType="AnounceVO">
+		select b.${anounceNo},
+		b.${anounceTitle},
+		b.${anounceContent}, b.${writer},
+		b.${anounceCdate}
+		from(
+		select rownum rn, a.* from(
+		select * from ${anounce}
+		order by
+		${anounceNo} desc
+		)a
+		)b where rn between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt
+		
+		from ${anounce}
+		<if test="value != null">
+		keyword
+		</if>
+	</select>
+	
+	 <select id="search_by_writer" resultType="AnounceVO">
+	   	select ${anounceNo}, ${anounceTitle}, ${anounceContent},
+	   	${writer}, ${anounceCdate} from( select rownum rn, a.* from(
+	   	select * from anounce where ${writer} like #{keyword} order by ${anounceNo} desc
+	   	)a
+	   	)b where rn between #{start} and #{end}
+	   </select>
+	   
+	   <select id="search_by_writer_count" resultType="Integer">
+	   	select count(*) total_cnt from ${anounce} where ${writer} like #{keyword}
+	   </select>
+	   
+	   <select id="search_by_title_content" resultType="AnounceVO">
+	   	select ${anounceNo}, ${anounceTitle}, ${anounceContent},
+	   	${writer}, ${anounceCdate} from( select rownum rn, a.* from(
+	   	select * from ${anounce} where (${anounceTitle} like #{keyword} or ${anounceContent} like #{keyword}) order by ${anounceNo} desc
+	   	)a
+	   	)b where rn between #{start} and #{end}
+	   </select>
+	   
+	   <select id="search_by_title_content_count" resultType="Integer">
+	   	select count(*) total_cnt from ${anounce} where ${anounceTitle} like #{keyword} or ${anounceContent} like #{keyword}
+	   </select>
+
+
+</mapper>

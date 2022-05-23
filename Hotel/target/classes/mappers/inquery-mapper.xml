@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.InqueryMapper">
+
+	<insert id="insert">
+		insert into ${inquery} (${inqueryTitle},
+		${inqueryContent},
+		${memberUserid})
+		values (#{inqueryTitle},
+		#{inqueryContent}, #{memberUserid})
+	</insert>
+
+	<select id="select_all" resultType="InqueryVO">
+		select * from ${inquery}
+		order
+		by ${inqueryNo} desc
+	</select>
+
+	<select id="select_by_inquery_no" resultType="InqueryVO">
+		select * from
+		${inquery} where ${inqueryNo} = #{inqueryNo}
+	</select>
+
+	<update id="update">
+		update ${inquery}
+		set ${inqueryTitle} =
+		#{inqueryTitle},
+		${inqueryContent} = #{inqueryContent}
+		where
+		${inqueryNo} = #{inqueryNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${inquery}
+		where ${inqueryNo} =
+		#{inqueryNo}
+	</delete>
+
+	<select id="paging" resultType="InqueryVO">
+		select b.${inqueryNo},
+		b.${inqueryTitle}, b.${inqueryReplyCount},
+		b.${inqueryContent}, b.${memberUserid},
+		b.${inqueryCdate} from(
+		select rownum rn, a.* from(
+		select * from
+		${inquery} 
+		order by ${inqueryNo} desc
+		)a
+		)b where rn between #{start} and
+		#{end}
+	</select>
+
+	<select id="select_by_userid" resultType="InqueryVO">
+		select * from ${inquery}
+		where ${memberUserid} like #{memberUserid}
+	</select>
+	
+	<select id="select_by_title_content" resultType="BoardVO">
+	   	select * from ${anounce_board}
+	   	where ${anounceTitle} like #{keyword} or
+	   		${anounceContent} like #{keyword}
+	   		order by ${boardNo} desc
+	   </select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt
+		from ${inquery}
+	</select>
+	  <update id="update_reply_count">
+	   	update ${inquery}
+	   	set ${inqueryReplyCount} = ${inqueryReplyCount} + #{amount}
+	   	where ${inqueryNo} = #{inqueryNo}
+	   </update>
+
+
+</mapper>

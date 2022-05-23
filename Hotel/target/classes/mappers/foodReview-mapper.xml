@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.FoodReviewMapper">
+
+	<insert id="insert">
+		insert into ${food_review} (${foodRvTitle},
+		${foodRvLike}, ${foodRvContent},
+		${memberUserid}, ${foodNo})
+		values
+		(#{foodRvTitle},
+		#{foodRvLike},
+		#{foodRvContent}, #{memberUserid},
+		#{foodNo})
+	</insert>
+
+	<select id="select_all" resultType="FoodReviewVO">
+		select * from ${food_review}
+		order by ${foodNo} desc
+	</select>
+
+	<select id="select_by_food_no" resultType="FoodReviewVO">
+		select * from
+		${food_review} where ${foodNo} = #{foodNo} order by ${foodRvNo} desc
+	</select>
+
+	<update id="update">
+		update ${food_review}
+		set ${foodRvTitle} =
+		#{foodRvTitle}, ${foodRvLike} = #{foodRvLike},
+		${foodRvContent} =
+		#{foodRvContent}
+		where
+		${foodRvNo} = #{foodRvNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${food_review}
+		where ${foodRvNo} =
+		#{foodRvNo}
+	</delete>
+	
+	<delete id="delete_by_food_no">
+		delete from ${food_review}
+		where ${foodNo} = #{foodNo}
+	</delete>
+
+
+
+
+</mapper>
