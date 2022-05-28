@@ -169,10 +169,7 @@
 																			like = '좋아요! &#128525;'
 																		} else if(this.playRvLike == 5){
 																			like = '최고에요! &#128151;'
-																		}
-																		
-
-																																			
+																		}													
 																			
 																		//if (memberUserid == this.memberUserid) {
 																			disabled = '';
@@ -307,12 +304,3 @@
  <%@ include file="footer.jspf" %>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

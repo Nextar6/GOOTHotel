@@ -17,8 +17,15 @@ public interface FoodDAO {
 	int getTotalCounts();
 	// 정렬 관련
 	
+	// 검색관련
+	List<FoodVO> searchKeyword(String keyword);
+	
+	
 	// 댓글 관련
 	int updateReplyCount(int amount, int foodNo);
 	int updateLikeCount(int amount, int foodNo);
+	
+	// 검색어 추천
+	List<FoodVO> recommendKeyword(String keyword);
 
 }

@@ -1,5 +1,7 @@
 package edu.spring.hotel.test;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,8 +26,30 @@ public class FoodDAOTest {
 	
 	@Test
 	public void foodTestDAO() {
-		foodInsertTest();
+//		foodInsertTest();
+//		foodRecommendkeyword();
+		foodSearchKeyword();
 	}
+
+	private void foodSearchKeyword() {
+		String keyword = "2";
+		List<FoodVO> list = dao.searchKeyword(keyword);
+		for(FoodVO vo : list) {
+			logger.info(vo.toString());
+		}
+		
+		
+		
+	}
+
+	private void foodRecommendkeyword() {
+		String keyword = "2";
+		List<FoodVO> list = dao.recommendKeyword(keyword);
+		for(FoodVO vo  : list) {
+			logger.info(vo.toString());
+		}
+		
+	} // end foodSelectRecommend
 
 	private void foodInsertTest() {
 		FoodVO vo = new FoodVO(0, "제목", "내용", "그림", "예약날짜", "아이디", 14, 0, 0, null);

@@ -18,41 +18,35 @@
 	<h2>글 수정 페이지</h2>
 	<br>
 
-	<form action="update" method="POST" enctype="multipart/form-data">
-		<div>
-			<input type="hidden" name="playNo" value="${vo.playNo }" readonly/>
+	<form action="food-update" method="POST" enctype="multipart/form-data">
+
+			<input type="hidden" name="foodNo" value="${vo.foodNo }" readonly/>
 			<input type="hidden" name="page" value = "${page }"/>
-				카테고리 <select name="playCategory">
-					<option value="themaPark" selected>테마파크
-					<option value="food">맛집
-					<option value="leisure">레저
-					<option value="perform">공연
-					<option value="tour">투어
-				</select>
-		</div>
+	
+	
 		<div>
-			제목 : <input type="text" name="playTitle" value="${vo.playTitle }" required>
+			제목 : <input type="text" name="foodTitle" value="${vo.foodTitle }" required>
 		</div>
 		<div>
 			<p>작성자 : ${vo.memberUserid }</p>
-			가격 : <input type="text" name="playPrice" value="${vo.playPrice }" required>
+			가격 : <input type="text" name="foodPrice" value="${vo.foodPrice }" required>
 
 		</div>
 		<br>
 		<div>
-			<img src="display?fileName=/${vo.playPic }" />
+			<img src="display?fileName=/${vo.foodPic }" />
 		</div>
 		<div>
-			<textarea rows="20" cols="120" name="playContent" 
-				required>${vo.playContent }</textarea>
+			<textarea rows="20" cols="120" name="foodContent" 
+				required>${vo.foodContent }</textarea>
 		</div>
-		예약 가능 날짜 : <input type="text" name="playBookDate" value="${vo.playBookDate }" required>
+		예약 가능 날짜 : <input type="text" name="foodBookDate" value="${vo.foodBookDate }" required>
 		<div>
 			<h3>이미지 삽입</h3>
 			<input style="display: block;" type="file" name="fileUpload" id="fileUpload"
 				multiple>
 		
-				<input type="hidden" name="playPic" id="playPic" value="${vo.playPic }">
+				<input type="hidden" name="foodPic" id="foodPic" value="${vo.foodPic }">
 		
 
 			<h3>수정할 이미지</h3>
@@ -97,7 +91,7 @@
 						str + '</div>';
 						$('#multipleDisplay').html(str);
 						
-						$('#playPic').val(data);
+						$('#foodPic').val(data);
 						}
 					
 					

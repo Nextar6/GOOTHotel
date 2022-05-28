@@ -150,5 +150,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		between #{start} and #{end}
 	</select>
 
+		<!-- Ajax로 실시간 검색어 추천 기능 -->
+	<select id="recommend_keyword" resultType="PlayVO">
+		select ${playTitle} from ${play}
+		where ${playTitle} like #{keyword}
+	</select>
+	
+	<!-- 검색 -->
+	<select id="search_keyword" resultType="PlayVO">
+		select * from ${play}
+		where ${playTitle} like #{keyword} order by ${playNo} desc
+	</select>
 
 </mapper>

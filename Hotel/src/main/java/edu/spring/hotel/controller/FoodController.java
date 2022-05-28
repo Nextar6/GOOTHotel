@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.spring.hotel.domain.FoodVO;
+import edu.spring.hotel.domain.PlayVO;
 import edu.spring.hotel.pageutil.PageCriteria;
 import edu.spring.hotel.service.FoodService;
 
@@ -36,6 +37,7 @@ private FoodService foodService;
 		model.addAttribute("foodList", foodList);
 		
 	} // end foodGET()
+	
 	
 	@GetMapping("food-insert")
 	public void foodInsertGET() {
@@ -89,5 +91,37 @@ private FoodService foodService;
 			reAttr.addFlashAttribute("delete_fail", "fail");
 			return "redirect:/play/food-detail";
 		}
-	}
+	} // end food delet
+	
+	@GetMapping("food-update")
+	public void updateGET(Model model, Integer foodNo, Integer page) {
+		logger.info("updateGET 호출 : foodNo = " + foodNo);
+		FoodVO vo = foodService.read(foodNo);
+		model.addAttribute("vo", vo);
+		model.addAttribute("page", page);
+	} // end updateGET()
+	
+	@PostMapping("food-update")
+	public String updatePOST(FoodVO vo, Integer page, RedirectAttributes reAttr) {
+		logger.info("updatePOST 호출 : vo " + vo.toString());
+
+		int result = foodService.update(vo);
+
+		if (result == 1) {
+			reAttr.addFlashAttribute("update_result", "success");
+			return "redirect:/play/food";
+		} else
+			reAttr.addFlashAttribute("update_fail", "fail");
+		return "redirect:/play/food-update?foodNo=" + vo.getFoodNo();
+
+	} // end food-updatePOST()
+	
+	@GetMapping("food-search")
+	public void foodSearchGET(Model model, String keyword) {
+		logger.info("food-search GET 호출");
+		List<FoodVO> foodList = foodService.readSearchKeyword(keyword);
+		model.addAttribute("foodList", foodList);
+		
+	} // end food-search
+	
 }

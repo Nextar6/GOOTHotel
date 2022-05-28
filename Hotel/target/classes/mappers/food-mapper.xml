@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${food}
 		where ${foodNo} = #{foodNo}
 	</select>
+	
 
 
 	<select id="paging" resultType="FoodVO">
@@ -150,7 +151,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		between #{start} and #{end}
 	</select>
 
-
-
+	<!-- Ajax로 실시간 검색어 추천 기능 -->
+	<select id="recommend_keyword" resultType="FoodVO">
+		select ${foodTitle} from ${food}
+		where ${foodTitle} like #{keyword}
+	</select>
+	
+	<!-- 검색 버튼 누르면 -->
+	<select id="search_keyword" resultType="FoodVO">
+		select * from ${food} where ${foodTitle} like #{keyword} order by ${foodNo}
+	</select>
 
 </mapper>

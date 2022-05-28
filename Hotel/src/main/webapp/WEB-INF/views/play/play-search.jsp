@@ -164,7 +164,7 @@ none
 		</h1>
 		<hr>
 		<h1>
-			<a href="http://localhost:8080/hotel/play/play-all"
+					<a href="http://localhost:8080/hotel/play/play-all"
 				style="color: #1abc9c;"> &nbsp;&nbsp;공연정보&nbsp;&nbsp;</a><span
 				class="badge">New</span>
 		</h1>

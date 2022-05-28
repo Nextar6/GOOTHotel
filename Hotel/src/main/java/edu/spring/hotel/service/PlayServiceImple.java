@@ -123,4 +123,16 @@ public class PlayServiceImple implements PlayService{
 		
 		return dao.selectOrderByLike(criteria);
 	}
+
+	@Override
+	public List<PlayVO> readRecommendKeyword(String keyword) {
+		logger.info("readRecommendKeyword 호출");
+		return dao.recommendKeyword(keyword);
+	} // end readRecommendKeyword
+	
+	@Override
+	public List<PlayVO> readSearchKeyword(String keyword){
+		logger.info("readSearchKeyword 호출");
+		return dao.searchKeyword(keyword);
+	} // end readSearchKeyword
 }

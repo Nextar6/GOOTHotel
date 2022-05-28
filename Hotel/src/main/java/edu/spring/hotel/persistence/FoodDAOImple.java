@@ -80,4 +80,19 @@ public class FoodDAOImple implements FoodDAO{
 		args.put("foodNo", foodNo);
 		return sqlSession.update(NAMESPACE + ".update_like_count", args);
 	}
+
+	@Override
+	public List<FoodVO> recommendKeyword(String keyword) {
+		logger.info("recommend(keyword) 호출");
+		keyword = "%" + keyword + "%";
+				
+		return sqlSession.selectList(NAMESPACE + ".recommend_keyword", keyword);
+	}
+
+	@Override
+	public List<FoodVO> searchKeyword(String keyword) {
+		logger.info("search 호출");
+		keyword = "%" + keyword + "%";
+		return sqlSession.selectList(NAMESPACE + ".search_keyword", keyword);
+	}
 }

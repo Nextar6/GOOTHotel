@@ -25,6 +25,14 @@ public interface PlayDAO {
 	
 	int updateReplyCount(int amount, int playNo);
 	int updateLikeCount(int amount, int playNo);
-//	TODO 게시판 검색기능구현 
+	
+//	공연 게시판 검색기능
+	List<PlayVO> searchKeyword(String keyword);
+	
+	// 검색어 추천
+	List<PlayVO> recommendKeyword(String keyword);
+	
+	
+	
 
 }
