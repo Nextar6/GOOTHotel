@@ -3,6 +3,7 @@ package edu.spring.hotel.service;
 import java.util.List;
 
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,19 @@ public class FoodSeriviceImple implements FoodService {
 		logger.info("getTotalCounts() 호출");
 		return dao.getTotalCounts();
 	} // end getTotalCounts()
+
+	@Override
+	public List<FoodVO> readRecommendKeyword(String keyword) {
+		logger.info("readRecommendKeyword 호출");
+		
+		return dao.recommendKeyword(keyword);
+	}
+
+	@Override
+	public List<FoodVO> readSearchKeyword(String keyword) {
+		logger.info("readSearchKeyword 호출");
+		
+		return dao.searchKeyword(keyword);
+	}
 
 }
