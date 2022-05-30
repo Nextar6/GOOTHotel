@@ -32,9 +32,10 @@ Java SpringBoot Framework 환경에서 호텔,모텔 및 맛집,공연,테마파
 
 ---
 
-## 개발도구
+## 개발도구 및 라이브러리
 
-Java / SpringBoot framework
+Java / SpringBoot framework / HTML, CSS, JavaScript, JQuery <br>
+Oracle SQLDeveloper / Ajax JSON /
 
 ---
 
