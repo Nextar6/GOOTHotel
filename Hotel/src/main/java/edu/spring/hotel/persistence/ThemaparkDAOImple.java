@@ -9,50 +9,50 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import edu.spring.hotel.domain.FoodVO;
+import edu.spring.hotel.domain.ThemaparkVO;
 import edu.spring.hotel.pageutil.PageCriteria;
 
 @Repository
-public class FoodDAOImple implements FoodDAO{
-	private static final Logger logger = LoggerFactory.getLogger(PlayDAOImple.class);
-	private static final String NAMESPACE = "edu.spring.hotel.FoodMapper";
-
+public class ThemaparkDAOImple implements ThemaParkDAO{
+	private static final Logger logger = LoggerFactory.getLogger(ThemaparkDAOImple.class);
+	private static final String NAMESPACE = "edu.spring.hotel.ThemaparkMapper";
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
-	public int insert(FoodVO vo) {
+	public int insert(ThemaparkVO vo) {
 		logger.info("insert() 호출");
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	@Override
-	public List<FoodVO> select() {
+	public List<ThemaparkVO> select() {
 		logger.info("select() 호출");
 		return sqlSession.selectList(NAMESPACE + ".select_all");
 	}
 
 	@Override
-	public FoodVO select(int foodNo) {
-		logger.info("select() 호출 : foodNo = " + foodNo);
-		return sqlSession.selectOne(NAMESPACE + ".select_by_food_no", foodNo);
+	public ThemaparkVO select(int themaparkNo) {
+		logger.info("select() 호출 : themaparkNo = " + themaparkNo);
+		return sqlSession.selectOne(NAMESPACE + ".select_by_themapark_no", themaparkNo);
+	
 	}
 
 	@Override
-	public int update(FoodVO vo) {
+	public int update(ThemaparkVO vo) {
 		logger.info("update() 호출 : vo = " + vo.toString());
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
 	@Override
-	public int delete(int foodNo) {
-		logger.info("delete() 호출 : playNo = " + foodNo);
-		return sqlSession.delete(NAMESPACE + ".delete", foodNo);
+	public int delete(int themaparkNo) {
+		logger.info("delete() 호출 : themaparkNo = " + themaparkNo);
+		return sqlSession.delete(NAMESPACE + ".delete", themaparkNo);
 	}
 
 	@Override
-	public List<FoodVO> select(PageCriteria criteria) {
+	public List<ThemaparkVO> select(PageCriteria criteria) {
 		logger.info("select() 호출 : start = " + criteria.getStart());
 		logger.info("select() 호출 : end = " + criteria.getEnd());
 		
@@ -66,23 +66,23 @@ public class FoodDAOImple implements FoodDAO{
 	}
 
 	@Override
-	public int updateReplyCount(int amount, int foodNo) {
+	public int updateReplyCount(int amount, int themaparkNo) {
 		Map<String, Integer> args = new HashMap<String, Integer>();
 		args.put("amount", amount);
-		args.put("foodNo", foodNo);
+		args.put("themaparkNo", themaparkNo);
 		return sqlSession.update(NAMESPACE + ".update_reply_count", args);
 	}
 
 	@Override
-	public int updateLikeCount(int amount, int foodNo) {
+	public int updateLikeCount(int amount, int themaparkNo) {
 		Map<String, Integer> args = new HashMap<String, Integer>();
 		args.put("amount", amount);
-		args.put("foodNo", foodNo);
+		args.put("themaparkNo", themaparkNo);
 		return sqlSession.update(NAMESPACE + ".update_like_count", args);
 	}
 
 	@Override
-	public List<FoodVO> recommendKeyword(String keyword) {
+	public List<ThemaparkVO> recommendKeyword(String keyword) {
 		logger.info("recommend(keyword) 호출");
 		keyword = "%" + keyword + "%";
 				
@@ -90,9 +90,10 @@ public class FoodDAOImple implements FoodDAO{
 	}
 
 	@Override
-	public List<FoodVO> searchKeyword(String keyword) {
+	public List<ThemaparkVO> searchKeyword(String keyword) {
 		logger.info("search 호출");
 		keyword = "%" + keyword + "%";
 		return sqlSession.selectList(NAMESPACE + ".search_keyword", keyword);
 	}
 }
+

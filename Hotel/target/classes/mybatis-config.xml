@@ -78,7 +78,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="memberName" value="member_name" />
 		<property name="memberAddress" value="member_address" />
 		<property name="memberCdate" value="member_cdate" />
+		
 		<!-- Play Table -->
+		
 		<property name="play" value="play" />
 		<property name="playNo" value="play_no" />
 		<property name="playTitle" value="play_title" />
@@ -94,6 +96,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 
 		<!-- Play Review Talble -->
+		
 		<property name="play_review" value="play_review" />
 		<property name="playRvNo" value="play_rv_no" />
 		<property name="playRvLike" value="play_rv_like" />
@@ -103,7 +106,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="playRvCdate" value="play_rv_cdate" />
 		<property name="playNo" value="play_no" />
 		
-			<!-- Food Review Talble -->
+		<!-- Food Review Talble -->
+			
 		<property name="food_review" value="food_review" />
 		<property name="foodRvNo" value="food_rv_no" />
 		<property name="foodRvLike" value="food_rv_like" />
@@ -115,6 +119,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 
 		<!-- Food Table -->
+		
 		<property name="food" value="food" />
 		<property name="foodNo" value="food_no" />
 		<property name="foodTitle" value="food_title" />
@@ -126,6 +131,21 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<property name="memberUserid" value="member_userid" />
 		<property name="foodPrice" value="food_price" />
 		<property name="foodLikeCount" value="food_like_count" />
+		
+		<!-- Themapark Table-->
+		
+		<property name="themapark" value="themapark" />
+		<property name="themaparkNo" value="themapark_no" />
+		<property name="themaparkTitle" value="themapark_title" />
+		<property name="themaparkContent" value="themapark_content" />
+		<property name="themaparkPic" value="themapark_pic" />
+		<property name="themaparkBookDate" value="themapark_book_date" />
+		<property name="themaparkReplyCount" value="themapark_reply_count" />
+		<property name="themaparkCdate" value="themapark_cdate" />
+		<property name="memberUserid" value="member_userid" />
+		<property name="themaparkPrice" value="themapark_price" />
+		<property name="themaparkLikeCount" value="themapark_like_count" />
+		
 
 		<!-- 진수 프로젝트 -->
 		<property name="member" value="member" />

@@ -107,4 +107,19 @@ public class PlayDAOImple implements PlayDAO {
 		return sqlSession.selectList(NAMESPACE + ".order_by_like", criteria);
 	}
 
+	@Override
+	public List<PlayVO> recommendKeyword(String keyword) {
+		logger.info("recoomend(keyword)호출 keyword = " + keyword);
+		keyword = "%" + keyword + "%";
+		
+		return sqlSession.selectList(NAMESPACE + ".recommend_keyword", keyword);
+	} // end recommendKeyword()
+
+	@Override
+	public List<PlayVO> searchKeyword(String keyword) {
+		logger.info("searchKeyword()호출 ");
+		keyword= "%" + keyword + "%";
+		return sqlSession.selectList(NAMESPACE + ".search_keyword", keyword);
+	}
+
 }

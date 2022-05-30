@@ -143,6 +143,8 @@ public class PlayController {
 		System.out.println("playButtonControll : " + playButtonControll );
 		model.addAttribute("playButtonControll", playButtonControll);
 	}// end playGET()
+	
+	
 
 	@GetMapping("play-update")
 	public void updateGET(Model model, Integer playNo, Integer page) {
@@ -274,6 +276,13 @@ public class PlayController {
 		model.addAttribute("pageMaker", pageMaker);
 
 	}
+	
+	@GetMapping("play-search")
+	public void playSearchGET(Model model, String keyword) {
+		logger.info("play-search GET 호출");
+		List<PlayVO> playList = playService.readSearchKeyword(keyword);
+		model.addAttribute("playList", playList);
+	} // end playSearchGET()
 
 //	 ------------------이미지 전송-------------------
 

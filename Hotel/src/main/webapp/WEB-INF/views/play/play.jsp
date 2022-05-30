@@ -138,7 +138,8 @@ none
 		</h1>
 		<hr>
 		<h1>
-			&nbsp;&nbsp;테마파크&nbsp;&nbsp;<span class="badge">New</span>
+			<a href="http://localhost:8080/hotel/play/themapark"
+				style="color: #1abc9c;"> &nbsp;&nbsp;테마파크&nbsp;&nbsp;</a><span class="badge">New</span>
 		</h1>
 		<hr>
 		<h1>
@@ -184,8 +185,9 @@ none
 		<hr>
 		<h1 style="background-color: #1abc9c; color: white; width: 20%">
 			테마 파크</h1>
-
+			<div class="readThemapark" id="readThemapark"></div>
 		<p></p>
+
 		<hr>
 		<h1 style="background-color: #1abc9c; color: white; width: 20%">
 			레져, 투어</h1>
@@ -209,9 +211,11 @@ none
 		var page = 1;
 		getFoodPage();
 		getPlayPage();
+		getThemaparkPage();
 		
 		var foodButtonControll = $('#foodButtonControll').val();
 		var playButtonControll = $('#playButtonControll').val();
+		// themaparkButton
 		console.log('page : '+ page);
 		console.log('foodButtonControll : '+ foodButtonControll);
 		
@@ -310,6 +314,31 @@ none
 				$('#readPlay').html(list);
 			}); // end getJSON
 		} // end getPlayPage()
+		
+		function getThemaparkPage() { // 다음페이지 불러오는 
+			var url = 'themapark/readNext/' + page;
+			
+			$.getJSON(url, function(jsonData) {
+				var list = '';
+				$(jsonData).each(function(){
+					console.log(this);
+					
+					list += '<div class="page_item">'
+					+ '<pre>'
+					+ '<ul>'
+					+ '<li><a href="themapark-detail?themaparkNo=' + this.themaparkNo + '"><img src="display?fileName=/' + this.themaparkPic
+					+	'" style="height: 220px; width: 160px;" /></a></li>'
+					+ '<li>제목 : ' + this.themaparkTitle + '</li>'
+					+ '<li>가격 : ' + this.themaparkPrice + '</li>'						
+					+ '<li>리뷰 갯수 : <a href="themapark-detail?themaparkNo=' + this.themaparkNo + '">' + this.themaparkReplyCount + '</a></li>'						
+				    + '</ul>'
+					+ '</pre>'
+					+ '</div>';
+					
+				}); // end each
+				$('#readThemapark').html(list);
+			}); // end getJSON
+		} // end getThemaparkPage()
 			
 			
 			var deleteResult = $('#deleteAlert').val();

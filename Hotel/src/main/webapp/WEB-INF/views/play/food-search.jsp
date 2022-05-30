@@ -112,9 +112,8 @@ none
 
 	<div
 		style="background-color: #1abc9c; padding: 25px; text-align: right">
+		
 		<form action="food-search" method="get">
-
-
 			<input class="input-txt" list="recommend-list" id="input-txt"
 				name="keyword" placeholder="맛집검색">
 			<datalist id="recommend-list">
@@ -145,8 +144,7 @@ none
 		</h1>
 		<hr>
 		<h1>
-			<a href="http://localhost:8080/hotel/play/themapark"
-				style="color: #1abc9c;"> &nbsp;&nbsp;테마파크&nbsp;&nbsp;</a><span class="badge">New</span>
+			&nbsp;&nbsp;테마파크&nbsp;&nbsp;<span class="badge">New</span>
 		</h1>
 		<hr>
 		<h1>

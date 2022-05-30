@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.hotel.ThemaparkMapper">
+
+	<insert id="insert">
+		insert into ${themapark} (${themaparkTitle},
+		${themaparkContent},
+		${themaparkPic}, ${themaparkBookDate},
+		${memberUserid},
+		${themaparkPrice})
+		values (#{themaparkTitle},
+		#{themaparkContent}, #{themaparkPic},
+		#{themaparkBookDate},
+		#{memberUserid}, #{themaparkPrice})
+	</insert>
+
+	<select id="select_all" resultType="ThemaparkVO">
+		select * from ${themapark}
+		order by
+		${themaparkNo} desc
+	</select>
+
+	<select id="select_by_themapark_no" resultType="ThemaparkVO">
+		select * from
+		${themapark}
+		where ${themaparkNo} = #{themaparkNo}
+	</select>
+	
+
+
+	<select id="paging" resultType="ThemaparkVO">
+		select b.${themaparkNo},
+		b.${themaparkTitle}, b.${themaparkBookDate},
+		b.${themaparkContent}, b.${themaparkPic},
+		b.${memberUserid}, b.${themaparkBookDate},
+		b.${themaparkReplyCount},
+		b.${themaparkCdate}, b.${themaparkPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${themapark}
+		order by
+		${themaparkNo}
+		desc
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+
+	<select id="total_count" resultType="Integer">
+		select count(*) total_cnt
+		from ${themapark}
+	</select>
+
+	<update id="update">
+
+		update ${themapark}
+		set
+		${themaparkTitle} = #{themaparkTitle},
+		${themaparkContent} = #{themaparkContent}, ${themaparkPic} = #{themaparkPic}
+
+		where
+		${themaparkNo} = #{themaparkNo}
+
+	</update>
+
+	<delete id="delete">
+		delete from ${themapark} where ${themaparkNo} = #{themaparkNo}
+
+	</delete>
+	
+	<update id="update_reply_count">
+	   	update ${themapark}
+	   	set ${themaparkReplyCount} = ${themaparkReplyCount} + #{amount}
+	   	where ${themaparkNo} = #{themaparkNo}
+	   </update>
+	   
+	   <!-- 리뷰에서 like 가져와서 평점 저장 -->
+	   <update id="update_like_count">
+	   	update ${themapark}
+	   	set ${themaparkLikeCount} = ${themaparkLikeCount} + #{amount}
+	   	where ${themaparkNo} = #{themaparkNo}
+	   </update>
+	   
+	 <!-- 댓글 많은순 정렬 -->
+	 	<select id="order_by_reply" resultType="ThemaparkVO">
+		select b.${themaparkNo},
+		b.${themaparkTitle}, b.${themaparkBookDate},
+		b.${themaparkContent}, b.${themaparkPic},
+		b.${memberUserid}, b.${themaparkBookDate},
+		b.${themaparkReplyCount}, 
+		b.${themaparkCdate}, b.${themaparkPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${themapark}
+		order by
+		${themaparkReplyCount}
+		desc
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+	
+	<!-- 가격순 정렬 -->
+	<select id="order_by_price" resultType="ThemaparkVO">
+		select b.${themaparkNo},
+		b.${themaparkTitle}, b.${themaparkBookDate},
+		b.${themaparkContent}, b.${themaparkPic},
+		b.${memberUserid}, b.${themaparkBookDate},
+		b.${themaparkReplyCount}, 
+		b.${themaparkCdate}, b.${themaparkPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${themapark}
+		order by
+		${themaparkPrice}
+		<if test="keyword.equals('max')">
+		desc
+		</if>
+		<if test="keyword.equals('min')">
+		asc
+		</if>	
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+	
+	<!-- 인기순 ( 평점순 으로 정렬 ) -->
+	
+	 	<select id="order_by_like" resultType="PlayVO">
+		select b.${themaparkNo},
+		b.${themaparkTitle}, b.${themaparkBookDate},
+		b.${themaparkContent}, b.${themaparkPic},
+		b.${memberUserid}, b.${themaparkBookDate},
+		b.${themaparkReplyCount}, b.${themaparkLikeCount},
+		b.${themaparkCdate}, b.${themaparkPrice}
+		from(
+		select rownum rn,
+		a.* from(
+		select * from ${themapark}
+		order by
+		${themaparkLikeCount}
+		desc
+		)a
+		)b where rn
+		between #{start} and #{end}
+	</select>
+
+	<!-- Ajax로 실시간 검색어 추천 기능 -->
+	<select id="recommend_keyword" resultType="ThemaparkVO">
+		select ${themaparkTitle} from ${themapark}
+		where ${themaparkTitle} like #{keyword}
+	</select>
+	
+	<!-- 검색 버튼 누르면 -->
+	<select id="search_keyword" resultType="ThemaparkVO">
+		select * from ${themapark} where ${themaparkTitle} like #{keyword} order by ${themaparkNo}
+	</select>
+
+</mapper>

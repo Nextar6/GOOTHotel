@@ -50,6 +50,10 @@
 	<a href="food-delete?foodNo=${vo.foodNo }"><input type="button"
 		value="글 삭제"></a>
 	<br>
+	
+	
+	<button id="add_cart">찜리스트 추가</button>
+
 	<hr>
 
 	<!-- POST 방식으로 데이터를 전송하려면 form을 사용해야 한다. -->
@@ -92,6 +96,9 @@
 						function() {
 							var foodNo = $('#foodNo').val();
 							getAllReplies();
+							
+								
+							});
 
 							$('#btn_add').click(function() {
 								var foodRvLike = $('#foodRvLike').val();
@@ -301,11 +308,13 @@
 							// 글 삭제
 							var result = $('$deleteAlert').val();
 							if (result == 'fail') {
-								alert('글 삭제 실패!');
+								alert('글 삭제 실패!')
 							}
 						}); // end document()
 	</script>
+	
  <%@ include file="footer.jspf" %>
+ 
 </body>
 </html>
 

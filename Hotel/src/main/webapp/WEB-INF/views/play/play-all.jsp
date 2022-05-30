@@ -111,6 +111,15 @@ none
 	float: left;
 	color: #1abc9c;
 }
+.input-txt {
+	font-size: 32px;
+	line-height: 38px;
+	height: 38px;
+	margin-right: 20px;
+	color: #222;
+	border: 1px solid #dddbda;
+	background: #fff;
+}
 </style>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -123,19 +132,20 @@ none
 
 	<h1 style="float: left; color: white;">공연 정보 게시판</h1>
 
-	<div
+<div
 		style="background-color: #1abc9c; padding: 25px; text-align: right">
-		<form action="anounce" method="get">
-			<input type="date"> <select name="pagingCount">
-				<option value="5" selected>5
-				<option value="10">10
-				<option value="20">20
-			</select> <select name="select">
-				<option value="titleOrContent">제목+내용
-				<option value="writer">작성자
-			</select> <input type="text" name="keyword" placeholder="search"> <input
-				type="submit" value="검색">
-		</form>
+		<form action="play-search" method="get">
+
+
+			<input class="input-txt" list="recommend-list" id="input-txt"
+				name="keyword" placeholder="공연검색">
+			<datalist id="recommend-list">
+				<option class="recommend" id="recommend">
+			</datalist><button type="submit" class="search_button" style="background:#1abc9c;" >
+				<img style="height:35px;"
+					src="display?fileName=/sp_gnb_2x_202234_133301 (2).png" />
+			</button>
+			</form>
 	</div>
 
 
@@ -154,11 +164,14 @@ none
 		</h1>
 		<hr>
 		<h1>
-			&nbsp;&nbsp;공연정보&nbsp;&nbsp;<span class="badge">New</span>
+			<a href="http://localhost:8080/hotel/play/play-all"
+				style="color: #1abc9c;"> &nbsp;&nbsp;공연정보&nbsp;&nbsp;</a><span
+				class="badge">New</span>
 		</h1>
 		<hr>
 		<h1>
-			&nbsp;&nbsp;테마파크&nbsp;&nbsp;<span class="badge">New</span>
+			<a href="http://localhost:8080/hotel/play/themapark"
+				style="color: #1abc9c;"> &nbsp;&nbsp;테마파크&nbsp;&nbsp;</a><span class="badge">New</span>
 		</h1>
 		<hr>
 		<h1>
@@ -219,6 +232,28 @@ none
 	<input type="hidden" id="updateAlert" value="${update_result }">
 
 	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#input-txt').keyup(function(){
+				var keyword = $('#input-txt').val();
+				console.log(keyword);
+				var url = 'recommend-search-play/' + keyword;
+				$.getJSON(url, function(jsonData){
+					console.log(jsonData);
+					var list = '';
+					$(jsonData).each(function(){
+						console.log(this);
+						list += '<div class="resultList">'
+							+ '<pre>'
+							+ '<option value="' + this.playTitle + '">'
+							+ '</pre>'
+							+ '</div>';
+					}); // end each()
+					$('#recommend').html(list);
+					
+				}); // end getJSON
+			}); // end keyup
+		}); // end document
+
 		
 
 			var deleteResult = $('#deleteAlert').val();

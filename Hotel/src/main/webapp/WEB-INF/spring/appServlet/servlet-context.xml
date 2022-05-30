@@ -63,8 +63,6 @@
    	<beans:bean id="authInterceptor"
    		class="edu.spring.hotel.interceptor.AuthInterceptor"></beans:bean>
    	<interceptors>
-
-   
    		<interceptor>
    			<mapping path="/board/inquery"/>
    	

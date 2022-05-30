@@ -14,5 +14,11 @@ public interface FoodService {
 	int delete(int foodNo);
 	
 	int getTotalCounts();
+	
+	// 검색어 추천
+	List<FoodVO> readRecommendKeyword(String keyword);
+	// 검색
+	List<FoodVO> readSearchKeyword(String keyword);
+	
 
 }

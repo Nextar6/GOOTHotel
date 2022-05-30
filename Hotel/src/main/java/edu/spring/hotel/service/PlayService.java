@@ -24,7 +24,10 @@ public interface PlayService {
 	int searchByWriterCounts(String keyword);
 	int searchByTitleOrCounts(String keyword);
 	int getTotalCounts();
+	// 검색어 추천 Ajax
+	List<PlayVO> readRecommendKeyword(String keyword);
+	// 공연정보 검색
+	List<PlayVO> readSearchKeyword(String keyword);
 	
-	// 가격별 정렬
 
 }
